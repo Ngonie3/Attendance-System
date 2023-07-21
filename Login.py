@@ -6,7 +6,7 @@ from tkinter import messagebox
 
 def goToMain():
     try:
-        connection = pymysql.connect(host='localhost', user='root', password='FyaHmahdKinG!3',
+        connection = pymysql.connect(host='localhost', user='root', password='enter_your_password',
                                      database='register_user')
         myCursor = connection.cursor()
     except:
