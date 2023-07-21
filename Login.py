@@ -18,16 +18,19 @@ def goToMain():
     myQuery = 'SELECT password FROM user_data WHERE password = %s'
     myCursor.execute(myQuery, (passwordEntry.get()))
     myRow = myCursor.fetchone()
-    if row is None or myRow is None and usernameEntry.get() == '' and passwordEntry.get() == '':
+
+    if row is None and myRow is None or usernameEntry.get() == '' or passwordEntry.get() == '':
         Frame(loginWindow, width=250, height=2, bg='firebrick1').place(x=580, y=222)
         Frame(loginWindow, width=250, height=2, bg='firebrick1').place(x=580, y=322)
         usernameEntry.config(fg='firebrick1')
         passwordEntry.config(fg='firebrick1')
         messagebox.showerror('Error!', 'Username and password fields cannot be empty!')
+
     elif row is None or usernameEntry.get() == '':
         Frame(loginWindow, width=250, height=2, bg='firebrick1').place(x=580, y=222)
         usernameEntry.config(fg='firebrick1')
         messagebox.showerror('Error!', 'Wrong username. Please try again')
+
     elif myRow is None or passwordEntry.get() == '':
         Frame(loginWindow, width=250, height=2, bg='firebrick1').place(x=580, y=322)
         passwordEntry.config(fg='firebrick1')
@@ -62,8 +65,11 @@ def reveal():
 
 def hide():
     closeEye.config(file='Images/closeye.png')
-    passwordEntry.config(show='*')
-    eyeButton.config(command=reveal)
+    if passwordEntry.get() == 'Password':
+        pass
+    else:
+        passwordEntry.config(show='*')
+        eyeButton.config(command=reveal)
 
 
 loginWindow = Tk()

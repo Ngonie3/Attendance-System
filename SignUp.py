@@ -2,6 +2,9 @@ from tkinter import *
 from PIL import ImageTk
 import pymysql
 from tkinter import messagebox
+from email.message import EmailMessage
+import ssl
+import smtplib
 
 
 def clear():
@@ -10,6 +13,32 @@ def clear():
     passwordEntry.delete(0, END)
     confirmPasswordEntry.delete(0, END)
     checkBtn.set(0)
+
+
+def send_email():
+    email_sender = 'ngonie3mav@gmail.com'
+    email_password = 'enter_your_password'
+    email_receiver = 'mafara.ngonidzashe@gmail.com'
+
+    subject = 'Successful Registration'
+    body = """
+    You have created your account successfully. Enjoy our services!
+    
+    Best Regards
+    
+    Ngonidzashe Mafara
+    """
+
+    em = EmailMessage()
+    em['From'] = email_sender
+    em['To'] = email_receiver
+    em['Subject'] = subject
+    em.set_content(body)
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(email_sender, email_password)
+        smtp.sendmail(email_sender, email_receiver, em.as_string())
 
 
 def connect_database():
@@ -38,7 +67,8 @@ def connect_database():
             myCursor.execute(query, (emailEntry.get(), usernameEntry.get(), passwordEntry.get()))
             connection.commit()
             connection.close()
-            messagebox.showinfo('Success', 'Sign up successful')
+            messagebox.showinfo('Success', 'Sign up successful. Please check your email')
+            send_email()
             clear()
 
 
@@ -86,7 +116,7 @@ heading.grid(row=0, column=0, padx=10, pady=10)
 emailLabel = Label(frame, text='Email', font=('Microsoft Yahei UI Light', 12, 'bold'), bg='white',
                    fg='black')
 emailLabel.grid(row=1, column=0, sticky='w', padx=25)
-emailEntry = Entry(frame, width=25, font=('Open Sans', 12))
+emailEntry = Entry(frame, width=26, font=('Open Sans', 12))
 emailEntry.grid(row=2, column=0, sticky='w', padx=25)
 
 usernameLabel = Label(frame, text='Username', font=('Microsoft Yahei UI Light', 12, 'bold'), bg='white',
