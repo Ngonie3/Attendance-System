@@ -6,7 +6,7 @@ from tkinter import messagebox
 
 def goToMain():
     try:
-        connection = pymysql.connect(host='localhost', user='root', password='enter_your_password',
+        connection = pymysql.connect(host='localhost', user='root', password='FyaHmahdKinG!3',
                                      database='register_user')
         myCursor = connection.cursor()
     except:
@@ -19,7 +19,7 @@ def goToMain():
     myCursor.execute(myQuery, (passwordEntry.get()))
     myRow = myCursor.fetchone()
 
-    if row is None and myRow is None or usernameEntry.get() == '' or passwordEntry.get() == '':
+    if row is None and myRow is None or usernameEntry.get() == '' and passwordEntry.get() == '':
         Frame(loginWindow, width=250, height=2, bg='firebrick1').place(x=580, y=222)
         Frame(loginWindow, width=250, height=2, bg='firebrick1').place(x=580, y=322)
         usernameEntry.config(fg='firebrick1')
