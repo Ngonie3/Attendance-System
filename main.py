@@ -24,8 +24,7 @@ cap.set(4, 480)
 
 imgBackground = cv2.imread("Resources/background.png")
 folderModePath = 'Resources/Modes'
-modePathList = os.listdir(folderModePath)  # modePathList is a list of all the modes found in the path folderModePath
-imgModeList = []  # this list is going to contain all the modes we found in the path folderModePath
+modePathList = os.listdir(folderModePath)
 for path in modePathList:
     imgModeList.append(cv2.imread(os.path.join(folderModePath, path)))
 
