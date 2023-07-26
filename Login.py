@@ -72,6 +72,11 @@ def hide():
         eyeButton.config(command=reveal)
 
 
+def changeOnHover(button, colorOnHover, colorOnLeave, textColorOnHover, textColorOnLeavingHover):
+    loginButton.bind("<Enter>", func=lambda e: loginButton.config(background=colorOnHover, fg=textColorOnHover))
+    loginButton.bind("<Leave>", func=lambda e: loginButton.config(background=colorOnLeave, fg=textColorOnLeavingHover))
+
+
 loginWindow = Tk()
 loginWindow.resizable(0, 0)
 loginWindow.title('Login Page')
@@ -107,6 +112,7 @@ loginButton = Button(loginWindow, text='Login', font=('Open Sans', 16, 'bold'),
                      fg='white', bg='black', activeforeground='white',
                      activebackground='black', cursor='hand2', bd=0, width=19, command=goToMain)
 loginButton.place(x=578, y=400)
+changeOnHover(loginButton, "white", "black", "black", "white")
 
 signupLabel = Label(loginWindow, text="Don't have an account?", font=('Open Sans', 9, 'bold'),
                     fg='firebrick1', bg='white')

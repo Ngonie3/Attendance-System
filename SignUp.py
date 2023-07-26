@@ -99,6 +99,11 @@ def hidePassword():
     eyeButton.config(command=revealPassword)
 
 
+def changeOnHover(button, colorOnHover, colorOnLeave, textOnHover, textOnLeavingHover):
+    signUpButton.bind("<Enter>", func=lambda e: signUpButton.config(background=colorOnHover, fg=textOnHover))
+    signUpButton.bind("<Leave>", func=lambda e: signUpButton.config(background=colorOnLeave, fg=textOnLeavingHover))
+
+
 signUpWindow = Tk()
 signUpWindow.title('Sign Up')
 signUpWindow.resizable(0, 0)
@@ -149,10 +154,11 @@ termsAndConditions = Checkbutton(frame, text="I agree to the Terms & Conditions"
                                  bg="white", activebackground="white", cursor='hand2', variable=checkBtn)
 termsAndConditions.grid(row=9, column=0, pady=(10, 0))
 
-signUpButton = Button(frame, text='Sign Up', font=('Microsoft Yahei UI Light', 16, 'bold'), bd=0,
+signUpButton = Button(frame, text='Sign Up', font=('Open Sans', 16, 'bold'), bd=0,
                       bg='black', width=19, activebackground='black', fg='white', command=connect_database,
                       cursor='hand2')
 signUpButton.grid(row=10, column=0, pady=(10, 0))
+changeOnHover(signUpButton, "white", "black", "black", "white")
 
 loginLabel = Label(frame, text='Already have an account?', font=('Open Sans', 10, 'bold'),
                    fg='firebrick1', bg='white')
